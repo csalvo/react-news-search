@@ -15,7 +15,7 @@ export default {
   },
   //searches for articles
   searchArticles: function(topic, startDate, endDate) {
-    return axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=b9f91d369ff59547cd47b931d8cbc56b:0:74623931&q=" + topic + "&begin_date=" + startDate + "1010&end_date=" + endDate + "0101");
+    return axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=453549f6a21b48999dcc00c65ad05d11&q=" + topic + "&begin_date=" + startDate + "1010&end_date=" + endDate + "0101");
   }
 
 };

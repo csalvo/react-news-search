@@ -14,7 +14,7 @@ const Nav = () =>
         </a>
       </div>
       <ul className="nav navbar-nav navbar-right">
-        <li><a href="/search">Search</a></li>
+        <li><a href="/">Search</a></li>
         <li><a href="/saved">Saved</a></li>
       </ul>
     </div>
