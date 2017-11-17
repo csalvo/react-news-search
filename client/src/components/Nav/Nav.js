@@ -1,7 +1,7 @@
 import React from "react";
 
 const Nav = () =>
-  <nav className="navbar navbar-inverse navbar-top" style={{backgroundColor: "#ffb6b5", borderColor: "#ffb6b5"}}>
+  <nav className="navbar navbar-inverse navbar-top" style={{backgroundColor: "#fc4949", borderColor: "#ffb6b5"}}>
     <div className="container-fluid">
       <div className="navbar-header">
         <a href="/" className="navbar-brand">
