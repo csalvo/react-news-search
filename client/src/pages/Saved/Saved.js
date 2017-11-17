@@ -60,8 +60,8 @@ class Saved extends Component {
                   ))}
                 </ListGroup>
               ) : (
-                <h3>There are no saved articles yet!
-                </h3>)}
+                <h4 style={{marginLeft: "15px"}}>{this.state.message}
+                </h4>)}
             </List>
           </Col>
         </Row>
