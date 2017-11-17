@@ -38,7 +38,8 @@ class Saved extends Component {
           <Col size="md-2"/>
           <Col size="md-8">
             <Jumbotron>
-              <h1>New York Times Search</h1>
+              <h1><i className="fa fa-newspaper-o" aria-hidden="true"></i></h1>
+              <h2>New York Times Search</h2>
               <p>Search for and save articles from the NYT!</p>
             </Jumbotron>
             <List>
@@ -49,8 +50,8 @@ class Saved extends Component {
                 <ListGroup>
                   {this.state.articles.map(articles => (
                     <ListItem key={articles.url}>
-                      <SaveBtn onClick={() => this.deleteArticle(articles._id)}>Delete</SaveBtn>
-                      <ViewBtn link={articles.url}>View</ViewBtn>
+                      <SaveBtn onClick={() => this.deleteArticle(articles._id)}><i className="fa fa-trash-o" aria-hidden="true"></i> Delete</SaveBtn>
+                      <ViewBtn link={articles.url}><i className="fa fa-eye" aria-hidden="true"></i> View</ViewBtn>
                       <h3>
                         {articles.title}
                       </h3>

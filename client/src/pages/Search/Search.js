@@ -26,8 +26,6 @@ class Search extends Component {
   setStatusMessage = () => {
     if (!this.state.search) {
       this.setState({message: "Enter a search to begin!"})
-    } else if (!this.state.articles.length){
-      this.setState({message: "No results, try a different search", topic: "", startDate: "", endDate: ""})
     }
   }
 
@@ -49,7 +47,10 @@ class Search extends Component {
         this.setState({articles: res.data.response.docs, search: true})
       )
       .catch(err => console.log(err));
-    this.setStatusMessage();
+
+    if (!this.state.articles.length){
+      this.setState({message: "No results, try a different search", topic: "", startDate: "", endDate: ""})
+    }
   };
 
   saveArticle = article => {
@@ -69,7 +70,8 @@ class Search extends Component {
           <Col size="md-2"/>
           <Col size="md-8">
             <Jumbotron>
-              <h1>New York Times Search</h1>
+              <h1><i className="fa fa-newspaper-o" aria-hidden="true"></i></h1>
+              <h2>New York Times Search</h2>
               <p>Search for and save articles from the NYT!</p>
             </Jumbotron>
             <form>
@@ -91,7 +93,7 @@ class Search extends Component {
                 onChange={this.handleInputChange}
                 value={this.state.endDate}
                 type="text"/>
-              <FormBtn onClick={this.handleFormSubmit}>Search</FormBtn>
+              <FormBtn onClick={this.handleFormSubmit}><i className="fa fa-search" aria-hidden="true"></i> Search</FormBtn>
             </form>
             <List>
               <ListHeading>
@@ -101,8 +103,8 @@ class Search extends Component {
                 <ListGroup>
                   {this.state.articles.map(articles => (
                     <ListItem key={articles.web_url}>
-                      <SaveBtn onClick={() => this.saveArticle(articles)}>Save</SaveBtn>
-                      <ViewBtn link={articles.web_url}>View</ViewBtn>
+                      <SaveBtn onClick={() => this.saveArticle(articles)}><i className="fa fa-download" aria-hidden="true"></i> Save</SaveBtn>
+                      <ViewBtn link={articles.web_url}><i className="fa fa-eye" aria-hidden="true"></i> View</ViewBtn>
                       <h3>
                         {articles.headline.main}
                       </h3>
@@ -111,8 +113,8 @@ class Search extends Component {
                   ))}
                   </ListGroup>
                 ) : (
-                  <h3>{this.state.message}
-                  </h3>)}
+                  <h4 style={{marginLeft: "15px"}}>{this.state.message}
+                  </h4>)}
             </List>
           </Col>
         </Row>
