@@ -38,7 +38,6 @@ class Saved extends Component {
           <Col size="md-2"/>
           <Col size="md-8">
             <Jumbotron>
-              <h1><i className="fa fa-newspaper-o" aria-hidden="true"></i></h1>
               <h2>New York Times Search</h2>
               <p>Search for and save articles from the NYT!</p>
             </Jumbotron>
@@ -60,7 +59,7 @@ class Saved extends Component {
                   ))}
                 </ListGroup>
               ) : (
-                <h4 style={{marginLeft: "15px"}}>{this.state.message}
+                <h4 style={{marginLeft: "15px"}}>There are no saved articles yet!
                 </h4>)}
             </List>
           </Col>

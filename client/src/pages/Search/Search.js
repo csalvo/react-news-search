@@ -77,7 +77,7 @@ class Search extends Component {
             <form>
               <Input
                 name="topic"
-                placeholder="Topic"
+                placeholder="Topic (required)"
                 onChange={this.handleInputChange}
                 value={this.state.topic}
                 type="text"/>
