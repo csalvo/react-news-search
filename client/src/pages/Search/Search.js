@@ -5,7 +5,8 @@ import {Input, FormBtn} from "../../components/Form";
 import {List, ListHeading, ListItem} from "../../components/List";
 import API from "../../utils/API.js"
 import {ListGroup} from "../../components/List/ListGroup";
-import { Link } from "react-router-dom";
+import {SaveBtn, ViewBtn} from "../../components/Buttons/";
+
 
 class Search extends Component {
   // Initialize this.state.books as an empty array
@@ -13,11 +14,24 @@ class Search extends Component {
     articles: [],
     topic: "",
     startDate: "",
-    endDate: ""
+    endDate: "",
+    message: "",
+    search: false
   };
 
-  handleInputChange = event => {
+  componentDidMount(){
+    this.setStatusMessage();
+  };
 
+  setStatusMessage = () => {
+    if (!this.state.search) {
+      this.setState({message: "Enter a search to begin!"})
+    } else if (!this.state.articles.length){
+      this.setState({message: "No results, try a different search", topic: "", startDate: "", endDate: ""})
+    }
+  }
+
+  handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
     const name = event.target.name;
@@ -31,14 +45,22 @@ class Search extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     API.searchArticles(this.state.topic, this.state.startDate, this.state.endDate)
-      .then(res => this.setState({articles: res.data.response.docs}))
+      .then(res =>
+        this.setState({articles: res.data.response.docs, search: true})
+      )
       .catch(err => console.log(err));
-
+    this.setStatusMessage();
   };
 
   saveArticle = article => {
-
+    API.saveArticle({
+      title: article.headline.main,
+      datePublished: article.pub_date,
+      url: article.web_url
+    }).then(res => console.log(res.data));
   };
+
+
 
   render() {
     return (
@@ -75,18 +97,22 @@ class Search extends Component {
               <ListHeading>
                 Search Results
               </ListHeading>
-              <ListGroup>
-                {this.state.articles.map(articles => (
-                  <ListItem key={articles.web_url}>
-                    <Link to={articles.web_url}>
-                    <h3>
-                      {articles.headline.main}
-                    </h3>
-                    </Link>
-                    <p> on {articles.pub_date}</p>
-                  </ListItem>
-                ))}
-              </ListGroup>
+              {this.state.search && this.state.articles.length ? (
+                <ListGroup>
+                  {this.state.articles.map(articles => (
+                    <ListItem key={articles.web_url}>
+                      <SaveBtn onClick={() => this.saveArticle(articles)}>Save</SaveBtn>
+                      <ViewBtn link={articles.web_url}>View</ViewBtn>
+                      <h3>
+                        {articles.headline.main}
+                      </h3>
+                      <p>Published on: {articles.pub_date}</p>
+                    </ListItem>
+                  ))}
+                  </ListGroup>
+                ) : (
+                  <h3>{this.state.message}
+                  </h3>)}
             </List>
           </Col>
         </Row>

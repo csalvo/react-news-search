@@ -3,7 +3,7 @@ import "./List.css";
 
 export const ListHeading = ({ children }) => {
   return (
-      <div class="panel-heading">
+      <div className="panel-heading">
         {children}
       </div>
   );
